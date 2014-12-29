@@ -1,6 +1,5 @@
 #!/bin/bash
-make -j32
-echo $PREFIX
+make -j$(getconf _NPROCESSORS_ONLN)
 EPICS_BASE=$PREFIX/lib/epics
 
 install -d $PREFIX/lib
