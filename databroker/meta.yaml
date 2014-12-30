@@ -1,0 +1,53 @@
+package:
+  name: databroker
+  version: {{ environ['GIT_DESCRIBE_TAG'] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
+
+source:
+  git_url: https://github.com/NSLS-II/DataBroker.git
+  git_rev: master
+  # use a local url and leave rev blank to have conda build current head, currently
+  # requires master branch of conda-build to work
+  # git_rev: ?
+
+build:
+  string: {{ environ.get('GIT_BUILD_STR', '') }}_np{{ np }}py{{ py }}
+  number: 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy
+
+  run:
+    - python
+    - metadatastore
+    - numpy
+
+test:
+  # Python imports
+  imports:
+    - databroker
+    - databroker.api
+    - databroker.server
+    - databroker.commands
+
+  #commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+
+
+  # You can also put a file called run_test.py in the recipe that will be run
+  # at test time.
+
+  # requires:
+    # Put any additional test requirements here.  For example
+    # - nose
+
+about:
+  home: https://github.com/NSLS-II/DataBroker
+  license: BSD
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
