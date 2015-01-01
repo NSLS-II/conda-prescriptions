@@ -6,13 +6,9 @@ source:
   fn: ncurses-5.9.tar.gz
   url: http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz
   md5: 8cb9c412e5f2d96bc6f459aa8c6282a1
-  patches:
-    # https://lists.gnu.org/archive/html/bug-ncurses/2011-04/msg00002.html
-    # http://lists.gnu.org/archive/html/bug-ncurses/2011-04/txtkWQqiQvcZe.txt
-    - fix.patch
 
 build:
-  number: 4 # [linux]
+  number: 6 
   detect_binary_files_with_prefix: true
 
 about:
