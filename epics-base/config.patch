@@ -1,0 +1,21 @@
+diff -uwr base-3.14.12.4/configure/CONFIG_COMMON base-3.14.12.4_wrk/configure/CONFIG_COMMON
+--- configure/CONFIG_COMMON	2013-12-16 16:56:27.000000000 -0500
++++ configure/CONFIG_COMMON	2014-12-31 13:58:41.690924788 -0500
+@@ -59,7 +59,7 @@
+ #-------------------------------------------------------
+ # Directories
+
+-INSTALL_LOCATION            = $(TOP)
++INSTALL_LOCATION            = $(PREFIX)
+
+ INSTALL_LOCATION_LIB        = $(INSTALL_LOCATION)/lib
+ INSTALL_LOCATION_BIN        = $(INSTALL_LOCATION)/bin
+@@ -200,7 +200,7 @@
+ OP_SYS_INCLUDES =
+
+ # Makefile specific flags
+-USR_INCLUDES =
++USR_INCLUDES = $(PREFIX)/include
+ USR_CFLAGS =
+ USR_CXXFLAGS =
+ USR_LDFLAGS =

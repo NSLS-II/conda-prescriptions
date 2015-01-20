@@ -7,6 +7,9 @@ source:
     fn: baseR3.14.12.4.tar.gz
     url: http://www.aps.anl.gov/epics/download/base/baseR3.14.12.4.tar.gz
 
+    patches:
+      - config.patch
+
 build:
   number: 0
 
