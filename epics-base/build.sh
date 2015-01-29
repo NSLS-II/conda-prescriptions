@@ -1,10 +1,12 @@
 #!/bin/bash
-make -j$(getconf _NPROCESSORS_ONLN)
-EPICS_BASE=$PREFIX/lib/epics
-EPICS_HOST_ARCH=$(startup/EpicsHostArch)
-
 install -d $PREFIX/bin
 install -d $PREFIX/lib
+install -d $PREFIX/lib/epics
+
+make -j$(getconf _NPROCESSORS_ONLN)
+
+EPICS_BASE=$PREFIX/lib/epics
+EPICS_HOST_ARCH=$(startup/EpicsHostArch)
 
 # Copy libraries into $PREFIX/lib
 cp -av $PREFIX/lib/epics/lib/$EPICS_HOST_ARCH/lib* $PREFIX/lib
