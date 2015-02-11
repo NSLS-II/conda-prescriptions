@@ -1,18 +1,19 @@
 #!/bin/bash
-make -j$(getconf _NPROCESSORS_ONLN)
-EPICS_BASE=$PREFIX/lib/epics
-
-install -d $PREFIX/lib
-cp -Prv lib/linux-x86_64/* $PREFIX/lib
-
 install -d $PREFIX/bin
-cp -Prv bin/linux-x86_64/caget $PREFIX/bin
-cp -Prv bin/linux-x86_64/caput $PREFIX/bin
-cp -Prv bin/linux-x86_64/camonitor $PREFIX/bin
-cp -Prv bin/linux-x86_64/caRepeater $PREFIX/bin
-cp -Prv bin/linux-x86_64/softIoc $PREFIX/bin
+install -d $PREFIX/lib
+install -d $PREFIX/lib/epics
 
-for X in bin configure db dbd include lib startup templates; do
-  install -d $EPICS_BASE/$X
-  cp -Prv $X/* $EPICS_BASE/$X
+make -j$(getconf _NPROCESSORS_ONLN)
+
+EPICS_BASE=$PREFIX/lib/epics
+EPICS_HOST_ARCH=$(startup/EpicsHostArch)
+
+# Copy libraries into $PREFIX/lib
+cp -av $PREFIX/lib/epics/lib/$EPICS_HOST_ARCH/lib* $PREFIX/lib
+
+# Setup symlinks for utilities
+BINS="caget caput camonitor softIoc"
+cd $PREFIX/bin
+for file in $BINS ; do
+	ln -s ../lib/epics/bin/$EPICS_HOST_ARCH/$file .
 done
