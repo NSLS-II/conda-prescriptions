@@ -27,6 +27,7 @@ requirements:
       - metadatastore
       - pyolog
       - pcaspy
+      - ipython
 
 test:
   # Python imports
