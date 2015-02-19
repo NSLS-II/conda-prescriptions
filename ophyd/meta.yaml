@@ -18,12 +18,12 @@ requirements:
     build:
       - python
       - setuptools
-  
+
     run:
       - python
       - readline
       - pyepics
-      - databroker
+      - dataportal
       - metadatastore
       - pyolog
       - pcaspy
