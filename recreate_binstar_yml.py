@@ -1,12 +1,22 @@
 
+import os
+import sys
+import yaml
+
+UPLOAD_ACCOUNT = None
+CHANNEL = 'dev'
+
+def make_template(package_name):
+    binstar_yml_template = """
+
 ## The package attribure specifies a binstar package namespace to build the package to.
 ## This can be specified here or on the command line
-package: lmfit
+package: {}
 
 ## You can also specify the account to upload to,
 ## you must be an admin of that account, this
 ## defaults to your user account
-user: edill
+user: {}
 
 #===============================================================================
 # Build Matrix Options
@@ -74,4 +84,49 @@ script:
 ## upload conda builds
 ## e.g. conda is an alias for /opt/anaconda/conda-bld/<os-arch>/*.tar.bz2
 build_targets:
- - conda
+ files: conda
+ channels: {}
+    """.format(package_name, UPLOAD_ACCOUNT, CHANNEL)
+    return binstar_yml_template
+
+def write_yml(build_folder, package_name):
+    # with open(os.path.join(build_folder, 'meta.yaml')) as f:
+    #     yaml_file = yaml.load(f)
+    #     package_name = yaml_file['package']['name']
+    print('package_name: {}'.format(package_name))
+    with open(os.path.join(build_folder, '.binstar.yml'), 'w') as f:
+        f.write(make_template(package_name))
+    pass
+
+
+def make_version_ymls(root_folder):
+    releases_folder = os.path.join(root_folder, 'releases')
+    for package_name in os.listdir(releases_folder):
+        package_folder = os.path.join(releases_folder, package_name)
+        for version_name in os.listdir(package_folder):
+            version_folder = os.path.join(package_folder, version_name)
+            if 'meta.yaml' in os.listdir(version_folder):
+                write_yml(version_folder, package_name)
+
+
+def make_master_ymls(root_folder):
+    root_folder = os.path.join(root_folder, 'master')
+    for member in os.listdir(root_folder):
+        if os.path.isdir(os.path.join(root_folder, member)):
+            write_yml(os.path.join(root_folder, member), member)
+
+
+def main(root_folder):
+    make_master_ymls(root_folder)
+    make_version_ymls(root_folder)
+    # find_build_folder(root_folder)
+
+
+if __name__ == "__main__":
+    UPLOAD_ACCOUNT = sys.argv[1]
+    try:
+        CHANNEL = sys.argv[2]
+    except IndexError:
+        # use the default channel
+        pass
+    main(os.getcwd())
