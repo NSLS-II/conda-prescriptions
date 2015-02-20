@@ -1,0 +1,51 @@
+package:
+  name: scikit-xray
+  version: {{ environ['GIT_DESCRIBE_TAG'] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
+
+source:
+    git_url: https://github.com/Nikea/scikit-xray.git
+    git_tag: master
+
+
+build:
+  number: 0
+  string: {{ environ.get('GIT_BUILD_STR', '') }}_np{{ np }}py{{ py }}
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy
+    - six
+  run:
+    - python
+    - numpy
+    - scipy
+    - six
+    - xraylib
+    - scikit-image
+    - lmfit
+    - netcdf4
+
+test:
+  requires:
+    - nose
+  imports:
+     - skxray
+     - skxray.core
+     - skxray.calibration
+     - skxray.constants
+     - skxray.constants.api
+     - skxray.dpc
+     - skxray.feature
+     - skxray.image
+     - skxray.recip
+     - skxray.spectroscopy
+     - skxray.fitting
+     - skxray.fitting.api
+     - skxray.io
+     - skxray.io.api
+
+about:
+  home: http://Nikea.github.io/scikit-xray/
+  license: 3-Clause BSD

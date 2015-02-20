@@ -1,0 +1,45 @@
+package:
+  name: dataportal
+  version: {{ environ['GIT_DESCRIBE_TAG'] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
+
+source:
+  git_url: https://github.com/NSLS-II/dataportal.git
+  git_rev: master
+  # use a local url and leave rev blank to have conda build current head, currently
+  # requires master branch of conda-build to work
+  # git_rev: ?
+
+build:
+  string: {{ environ.get('GIT_BUILD_STR', '') }}_np{{ np }}py{{ py }}
+  number: 0
+
+  entry_points:
+    - replay = dataportal.replay.replay:main
+
+requirements:
+  build:
+    - python
+    - enaml [py2k]
+    - numpy
+    - six
+
+  run:
+    - python
+    - pandas
+    - matplotlib
+    - pyyaml
+    - enaml [py2k]
+    - bubblegum [py2k]
+    - scikit-xray [py2k]
+    - pims [py2k]
+    - metadatastore
+    - filestore
+    - channelarchiver
+    - six
+
+test:
+  imports:
+    - dataportal.broker
+    - dataportal.muxer
+    - dataportal.replay
+    - dataportal.replay.replay [py2k]
