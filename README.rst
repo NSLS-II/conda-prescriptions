@@ -16,7 +16,7 @@ Building the binaries with the NSLS-II build server
 
       python recreate_binstar_yml.py edill main
 
-#. Build off the master branch for all configured repositories ::
+#. Submit master branch builds for all repositories in the ``master/`` folder ::
 
       cd master
       bash unix-build.sh
