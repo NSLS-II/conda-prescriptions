@@ -6,7 +6,10 @@ do
         cd $f
         if [ -e ".binstar.yml" ]
         then
-            binstar-build submit
+            if [[ $f == *"master"* ]]
+            then
+                binstar-build submit
+            fi
         fi
         cd ..
     fi
