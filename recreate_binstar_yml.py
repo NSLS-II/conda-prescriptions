@@ -5,7 +5,7 @@ import re
 import yaml
 
 UPLOAD_ACCOUNT = None
-CHANNEL = 'dev'
+CHANNEL = None
 
 def safe_yaml_read(fpath, replace_str=''):
     """
@@ -130,10 +130,13 @@ def make_ymls(root_folder):
 
 
 if __name__ == "__main__":
+    print("Usage: python recreate_binstar_yml.py user_account channel_name")
+    print("Example: python recreate_binstar_yml.py edill main")
     UPLOAD_ACCOUNT = sys.argv[1]
     try:
         CHANNEL = sys.argv[2]
     except IndexError:
         # use the default channel
-        pass
+        CHANNEL = 'dev'
+    # make the yaml files
     make_ymls(os.getcwd())
