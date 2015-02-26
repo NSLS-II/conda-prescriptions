@@ -3,7 +3,7 @@ package:
   version: {{ environ['GIT_DESCRIBE_TAG'] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
 
 source:
-  git_url: https://github.com/NSLS-II/metadataStore.git
+  git_url: https://github.com/NSLS-II/metadatastore.git
   git_rev: master
   # use a local url and leave rev blank to have conda build current head, currently
   # requires master branch of conda-build to work
@@ -16,26 +16,24 @@ build:
 requirements:
   build:
     - python
-    - setuptools
-    - numpy
+    - six 
 
   run:
     - python
-    - numpy
-    - pymongo
     - six
+    - pyyaml
+    - mongoengine
 
 
 test:
   # Python imports
   imports:
-    - metadataStore
-    - metadataStore.utilities
-    - metadataStore.config
-    - metadataStore.mdstools
-    - metadataStore.database
-    - metadataStore.sessionManager
-    - metadataStore.api
+    - metadatastore
+    - metadatastore.conf
+    - metadatastore.odm_templates
+    - metadatastore.document
+    - metadatastore.commands
+    - metadatastore.api
 
   #commands:
     # You can put test commands to be run here.  Use this to test that the
@@ -50,7 +48,7 @@ test:
     # - nose
 
 about:
-  home: https://github.com/NSLS-II/metadataStore
+  home: https://github.com/NSLS-II/metadatastore
   license: BSD
 
 # See
