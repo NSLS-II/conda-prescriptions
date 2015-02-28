@@ -1,0 +1,13 @@
+package:
+  name: fftw
+  version: !!str 2.1.5
+
+source:
+    fn: fttw-2.1.5.tar.gz
+    url: http://www.fftw.org/fftw-2.1.5.tar.gz
+
+build:
+  number: 0
+
+#requirements:
+#  build:
