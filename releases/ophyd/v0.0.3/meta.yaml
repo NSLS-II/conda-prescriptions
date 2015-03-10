@@ -13,7 +13,7 @@ source:
 
 
 build:
-  number: 0
+  number: 1
 
   #preserve_egg_dir: True
   #entry_points:
@@ -39,7 +39,7 @@ requirements:
     - pcaspy
     - metadatastore
     - six
-    - ipython
+    - ipython <=2.4.1
     - pyolog
 
 test:
