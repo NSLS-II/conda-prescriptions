@@ -39,7 +39,7 @@ requirements:
     - pcaspy
     - metadatastore
     - six
-    - ipython <= 2.4.1
+    - ipython <=2.4.1
     - pyolog
 
 test:
