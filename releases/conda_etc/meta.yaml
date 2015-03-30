@@ -1,0 +1,9 @@
+package:
+  name: conda_etc
+  version: '1'
+
+build:
+  number: 0
+
+about:
+  summary: 'Make user the $PREFIX/etc path is available in CONDA_ETC_'
