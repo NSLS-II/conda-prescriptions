@@ -1,0 +1,18 @@
+package:
+  name: srx_analysis
+  version: '0.1'
+
+
+build:
+  number: 0
+
+
+requirements:
+  run:
+    - srx_configuration
+    - matplotlib
+    - dataportal
+    - openpyxl
+    - ipython-notebook
+    - vistrails
+    - scikit-xray
