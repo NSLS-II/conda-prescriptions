@@ -1,0 +1,13 @@
+package:
+  name: chx_configuration
+  version: '1'
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - conda_etc
+
+about:
+  summary: 'CHX server configuration'
