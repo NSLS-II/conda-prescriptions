@@ -5,7 +5,7 @@ ETC=$PREFIX/etc
 
 
 # set up
-echo "# mds configuration
+echo "# metadatastore configuration
 # installed by hxn_configuration
 # DO NOT EDIT
 host: xf03id-ca1

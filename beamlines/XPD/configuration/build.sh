@@ -5,7 +5,7 @@ ETC=$PREFIX/etc
 
 
 # set up
-echo "# mds configuration
+echo "# metadatastore configuration
 # installed by xpd_configuration
 # DO NOT EDIT
 host: xf28id-ca1.cs.nsls2.local
