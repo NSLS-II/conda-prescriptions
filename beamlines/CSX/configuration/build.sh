@@ -9,7 +9,7 @@ echo "# metadatastore configuration
 # installed by csx_configuration
 # DO NOT EDIT
 host: xf23id-broker
-database: datastore
+database: datastore2
 port: 27017
 timezone: US/Eastern
 " > $ETC/metadatastore.yml
