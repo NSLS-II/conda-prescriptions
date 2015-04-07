@@ -1,0 +1,17 @@
+package:
+  name: srx_collection
+  version: '0.3'
+
+
+build:
+  number: 0
+
+
+requirements:
+  run:
+    - srx_configuration
+    - ophyd
+    - pyolog
+    - matplotlib
+    - dataportal
+    - openpyxl

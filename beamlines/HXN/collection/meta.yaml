@@ -1,0 +1,17 @@
+package:
+  name: hxn_collection
+  version: '0.3'
+
+
+build:
+  number: 0
+
+
+requirements:
+  run:
+    - hxn_configuration
+    - ophyd
+    - pyolog
+    - matplotlib
+    - dataportal
+    - openpyxl

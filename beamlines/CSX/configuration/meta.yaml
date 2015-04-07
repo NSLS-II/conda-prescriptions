@@ -1,0 +1,13 @@
+package:
+  name: csx_configuration
+  version: '1'
+
+build:
+  number: 1
+
+requirements:
+  run:
+    - conda_etc
+
+about:
+  summary: 'CSX server configuration'
