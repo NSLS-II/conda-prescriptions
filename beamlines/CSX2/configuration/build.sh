@@ -6,19 +6,19 @@ ETC=$PREFIX/etc
 
 # set up
 echo "# metadatastore configuration
-# installed by csx_configuration
+# installed by csx2_configuration
 # DO NOT EDIT
 host: xf23id-broker
-database: datastore2
+database: datastore-23id2
 port: 27017
 timezone: US/Eastern
 " > $ETC/metadatastore.yml
 
 echo "# filestore configuration
-# installed by csx_configuration
+# installed by csx2_configuration
 # DO NOT EDIT
 host: xf23id-broker
-database: filestore
+database: filestore-23id2
 port: 27017
 " > $ETC/filestore.yml
 
