@@ -3,11 +3,11 @@ package:
   version: '1'
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   run:
     - conda_etc
 
 about:
-  summary: 'Development Enviroment server configuration'
+  summary: 'Development environment configurations to point metadatastore and filestore at localhost'

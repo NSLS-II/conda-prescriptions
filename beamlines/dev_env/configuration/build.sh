@@ -9,7 +9,7 @@ echo "# metadatastore configuration
 # installed by nslsii_dev_configuration
 # DO NOT EDIT
 host: localhost
-database: datastore_DEV
+database: datastore-dev
 port: 27017
 timezone: US/Eastern
 " > $ETC/metadatastore.yml
@@ -18,7 +18,7 @@ echo "# filestore configuration
 # installed by nslsii_dev_configuration
 # DO NOT EDIT
 host: localhost
-database: filestore_DEV
+database: filestore-dev
 port: 27017
 " > $ETC/filestore.yml
 
