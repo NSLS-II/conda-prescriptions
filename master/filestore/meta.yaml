@@ -43,3 +43,7 @@ test:
     - filestore.odm_templates
     - filestore.retrieve
     - filestore.utils
+
+about:
+  home: https://github.com/NSLS-II/filestore
+  license: BSD
