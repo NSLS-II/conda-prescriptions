@@ -11,23 +11,22 @@ source:
   # git_rev: ?
 
 build:
-    number: 0
-    string: {{ environ.get('GIT_BUILD_STR', '') }}_np{{ np }}py{{ py }}
+  number: 0
+  string: {{ environ.get('GIT_BUILD_STR', '') }}_{{ py }}_np{{ np }}
 
 requirements:
-    build:
-      - python
-      - setuptools
-
-    run:
-      - python
-      - readline
-      - pyepics
-      - dataportal
-      - metadatastore
-      - pyolog
-      - pcaspy
-      - ipython
+  build:
+    - python
+    - setuptools
+  run:
+    - python
+    - pyepics
+    - pcaspy
+    - metadatastore
+    - six
+    - ipython
+    - matplotlib
+    - pyolog
 
 test:
   # Python imports
@@ -35,6 +34,7 @@ test:
     - ophyd
     - ophyd.controls
     - ophyd.controls.areadetector
+    - ophyd.controls.cas
     - ophyd.runengine
     - ophyd.session
     - ophyd.userapi

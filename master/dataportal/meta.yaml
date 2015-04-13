@@ -5,10 +5,8 @@ package:
 source:
   git_url: https://github.com/NSLS-II/dataportal.git
   git_rev: master
-  # use a local url and leave rev blank to have conda build current head, currently
-  # requires master branch of conda-build to work
-  # git_rev: ?
-
+  patches:
+    - setup_py.patch
 build:
   string: {{ environ.get('GIT_BUILD_STR', '') }}_np{{ np }}py{{ py }}
   number: 0
@@ -39,7 +37,17 @@ requirements:
 
 test:
   imports:
-    - dataportal.broker
-    - dataportal.muxer
-    - dataportal.replay
-    - dataportal.replay.replay [py2k]
+    - 'dataportal'
+    - 'dataportal.api'
+    - 'dataportal.testing'
+    - 'dataportal.examples'
+    - 'dataportal.examples.sample_data'
+    - 'dataportal.broker'
+    - 'dataportal.muxer'
+    - 'dataportal.sources'
+    - 'dataportal.sources.dummy_sources'
+    - 'dataportal.utils'
+    - 'dataportal.replay'
+    - 'dataportal.replay.muxer'  [py2k]
+    - 'dataportal.replay.scalar' [py2k]
+    - 'dataportal.replay.search' [py2k]
