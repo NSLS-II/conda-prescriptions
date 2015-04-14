@@ -66,6 +66,7 @@ script:
 build_targets:
  files: conda
  channels: {}
+iotimeout: 600
  """.format(package_name, upload_acct, channel_name)
     return binstar_yml_template
 
@@ -88,6 +89,68 @@ script:
 build_targets:
  files: conda
  channels: {}
+iotimeout: 600
+ """.format(package_name, upload_acct, channel_name)
+    return binstar_yml_template
+
+
+def make_debian7_template(package_name, upload_acct, channel_name=None):
+    if channel_name is None:
+        channel_name = DEFAULT_CHANNEL
+    binstar_yml_template = """package: {0}
+user: {1}
+platform:
+ - linux-64
+engine:
+ - python=2.7
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build . --python 2.7
+build_targets:
+ files: conda
+ channels: {2}
+iotimeout: 600
+---
+user: {1}
+platform:
+ - linux-64
+engine:
+ - python=3.4
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build . --python 3.4
+build_targets:
+ files: conda
+ channels:
+   - {2}
+iotimeout: 600
+ """.format(package_name, upload_acct, channel_name)
+    return binstar_yml_template
+
+
+def make_debian7_python_independent_template(package_name, upload_acct, channel_name=None):
+    if channel_name is None:
+        channel_name = DEFAULT_CHANNEL
+    binstar_yml_template = """package: {0}
+user: {1}
+platform:
+ - linux-64
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build .
+build_targets:
+ files: conda
+ channels: {2}
+iotimeout: 600
  """.format(package_name, upload_acct, channel_name)
     return binstar_yml_template
 
@@ -95,8 +158,8 @@ build_targets:
 def make_default_template(package_name, upload_acct, channel_name=None):
     if channel_name is None:
         channel_name = DEFAULT_CHANNEL
-    binstar_yml_template = """package: {}
-user: {}
+    binstar_yml_template = """package: {0}
+user: {1}
 platform:
  - linux-64
  - osx-64
@@ -110,8 +173,10 @@ script:
  - conda build . --python 2.7
 build_targets:
  files: conda
- channels: main
+ channels: {2}
+iotimeout: 600
 ---
+user: {1}
 platform:
  - linux-64
  - osx-64
@@ -126,25 +191,57 @@ script:
 build_targets:
  files: conda
  channels:
-   - main
-   - foo
-   - dev
-   - banana
+   - {2}
+iotimeout: 600
  """.format(package_name, upload_acct, channel_name)
     return binstar_yml_template
 
+
+def make_py2only_template(package_name, upload_acct, channel_name=None):
+    if channel_name is None:
+        channel_name = DEFAULT_CHANNEL
+    binstar_yml_template = """package: {0}
+user: {1}
+platform:
+ - linux-64
+ - osx-64
+engine:
+ - python=2.7
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build . --python 2.7
+build_targets:
+ files: conda
+ channels: {2}
+iotimeout: 600
+ """.format(package_name, upload_acct, channel_name)
+    return binstar_yml_template
+
+
 TEMPLATE_DICT = {
     'default': make_default_template,
-    'python/3.4.2': make_python_3_4_2_template,
-    'python/2.7.9': make_python_2_7_9_template,
+    'python': make_debian7_python_independent_template,
+    'readline': make_debian7_python_independent_template,
+    'ncurses': make_debian7_python_independent_template,
+    'vistrails': make_py2only_template,
+    'pyspec': make_py2only_template,
+    'carchivetools': make_py2only_template,
+    'channelarchiver': make_py2only_template,
 }
 
 def write_yml(build_folder, upload_acct, channel_name):
     package_name = get_package_name(os.path.join(build_folder, 'meta.yaml'))
     with open(os.path.join(build_folder, '.binstar.yml'), 'w') as f:
-        package = '/'.join(build_folder.split('/')[-2:])
-        template = TEMPLATE_DICT.get(package, TEMPLATE_DICT['default'])
+        template = TEMPLATE_DICT.get(package_name.lower(), TEMPLATE_DICT['default'])
         f.write(template(package_name, upload_acct, channel_name))
+    with open(os.path.join(build_folder, 'binstar-build-submit.sh'), 'w') as f:
+        cmd = "binstar-build submit"
+        cmd += " -p {}/{}".format(upload_acct, package_name)
+        cmd += " --channel {}".format(channel_name)
+        f.write(cmd)
 
 
 def make_ymls(root_folder, upload_acct, channel_name):

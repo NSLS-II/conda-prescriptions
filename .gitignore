@@ -103,3 +103,4 @@ build_scripts/
 builds/
 journal.csv
 worker.yaml
+binstar-build-submit.sh
