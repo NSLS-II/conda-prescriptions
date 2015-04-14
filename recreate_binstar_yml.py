@@ -29,7 +29,7 @@ def safe_yaml_read(fpath, replace_str=''):
         for ln in f:
             # handle the jinja2 templating correctly
             if ln.split(':')[0] in ['version', 'string']:
-                print('ln.split(":")[0]: {}'.format(ln.split(':')[0]))
+                # print('ln.split(":")[0]: {}'.format(ln.split(':')[0]))
                 ln = re.sub(r'{[{%].*?[%}]}', '', ln)
             lns.append(ln)
 
@@ -41,13 +41,58 @@ def get_package_name(fpath):
         lns = []
         for ln in f:
             split = ln.split()
-            print('split: {}'.format(split))
+            # print('split: {}'.format(split))
             # handle the jinja2 templating correctly
             if len(split) >= 2 and split[0][:4] == 'name':
                 return split[1]
     raise
 
-def make_template(package_name, upload_acct, channel_name=None):
+
+def make_python_2_7_9_template(package_name, upload_acct, channel_name=None):
+    if channel_name is None:
+        channel_name = DEFAULT_CHANNEL
+    binstar_yml_template = """package: {}
+user: {}
+platform:
+ - linux-64
+engine:
+ - python=2.7
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build . --python 2.7
+build_targets:
+ files: conda
+ channels: {}
+ """.format(package_name, upload_acct, channel_name)
+    return binstar_yml_template
+
+
+def make_python_3_4_2_template(package_name, upload_acct, channel_name=None):
+    if channel_name is None:
+        channel_name = DEFAULT_CHANNEL
+    binstar_yml_template = """package: {}
+user: {}
+platform:
+ - linux-64
+engine:
+ - python=3.4
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build . --python 3.4
+build_targets:
+ files: conda
+ channels: {}
+ """.format(package_name, upload_acct, channel_name)
+    return binstar_yml_template
+
+
+def make_default_template(package_name, upload_acct, channel_name=None):
     if channel_name is None:
         channel_name = DEFAULT_CHANNEL
     binstar_yml_template = """package: {}
@@ -88,11 +133,18 @@ build_targets:
  """.format(package_name, upload_acct, channel_name)
     return binstar_yml_template
 
+TEMPLATE_DICT = {
+    'default': make_default_template,
+    'python/3.4.2': make_python_3_4_2_template,
+    'python/2.7.9': make_python_2_7_9_template,
+}
 
 def write_yml(build_folder, upload_acct, channel_name):
     package_name = get_package_name(os.path.join(build_folder, 'meta.yaml'))
     with open(os.path.join(build_folder, '.binstar.yml'), 'w') as f:
-        f.write(make_template(package_name, upload_acct, channel_name))
+        package = '/'.join(build_folder.split('/')[-2:])
+        template = TEMPLATE_DICT.get(package, TEMPLATE_DICT['default'])
+        f.write(template(package_name, upload_acct, channel_name))
 
 
 def make_ymls(root_folder, upload_acct, channel_name):
