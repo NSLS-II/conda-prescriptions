@@ -57,8 +57,12 @@ platform:
  - osx-64
 engine:
  - python=2.7
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
 script:
-  - conda build . --python 2.7
+ - conda build . --python 2.7
 build_targets:
  files: conda
  channels: main
@@ -68,11 +72,19 @@ platform:
  - osx-64
 engine:
  - python=3.4
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
 script:
-  - conda build . --python 3.4
+ - conda build . --python 3.4
 build_targets:
  files: conda
- channels: main
+ channels:
+   - main
+   - foo
+   - dev
+   - banana
  """.format(package_name, upload_acct, channel_name)
     return binstar_yml_template
 
