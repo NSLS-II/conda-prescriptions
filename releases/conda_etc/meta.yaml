@@ -7,6 +7,6 @@ build:
 
 requirements:
   run:
-    - conda-env >= 2.4
+    - conda-env >=2.4
 about:
   summary: 'Make user the $PREFIX/etc path is available in CONDA_ETC_'
