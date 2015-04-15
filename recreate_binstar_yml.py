@@ -27,100 +27,221 @@ def safe_yaml_read(fpath, replace_str=''):
     with open(fpath, 'r') as f:
         lns = []
         for ln in f:
-            lns.append(re.sub(r'{[{%].*?[%}]}', '', ln))
+            # handle the jinja2 templating correctly
+            if ln.split(':')[0] in ['version', 'string']:
+                # print('ln.split(":")[0]: {}'.format(ln.split(':')[0]))
+                ln = re.sub(r'{[{%].*?[%}]}', '', ln)
+            lns.append(ln)
+
     meta_dict = yaml.load(''.join(lns))
     return meta_dict
 
+def get_package_name(fpath):
+    with open(fpath, 'r') as f:
+        lns = []
+        for ln in f:
+            split = ln.split()
+            # print('split: {}'.format(split))
+            # handle the jinja2 templating correctly
+            if len(split) >= 2 and split[0][:4] == 'name':
+                return split[1]
+    raise
 
-def make_template(package_name, upload_acct, channel_name=None):
+
+def make_python_2_7_9_template(package_name, upload_acct, channel_name=None):
     if channel_name is None:
         channel_name = DEFAULT_CHANNEL
-    binstar_yml_template = """## The package attribure specifies a binstar package namespace to build the package to.
-## This can be specified here or on the command line
-package: {}
-
-## You can also specify the account to upload to,
-## you must be an admin of that account, this
-## defaults to your user account
+    binstar_yml_template = """package: {}
 user: {}
-
-#===============================================================================
-# Build Matrix Options
-# Thes options may be a single item, a list or empty
-# The resulting number of builds is [platform * engine * env]
-#===============================================================================
-
-## The platforms to build on.
-## platform defaults to linux-64
 platform:
  - linux-64
- - osx-64
-#  - linux-32
-## The engine are the inital conda packages you want to run with
 engine:
- - python=2
- - python=3
-## The env param is an environment variable list
-# engine:
-#  - MY_ENV=A CC=gcc
-#  - MY_ENV=B
-
-#===============================================================================
-# Scrip options
-# Thes options may be broken out into the before_script, script and after_script
-# or not, that is up to you
-#===============================================================================
-
-## Run before the script
-# before_script:
-#   - echo "before_script!"
-## Put your main computations here!
+ - python=2.7
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
 script:
-  - conda build .
-## This will run after the script regardless of the result of script
-## BINSTAR_BUILD_RESULT=[succcess|failure]
-# after_script:
-#   - echo "The build was a $BINSTAR_BUILD_RESULT" | tee artifact1.txt
-## This will be run only after a successfull build
-# after_success:
-#   - echo "after_success!"
-## This will be run only after a build failure
-# after_failure:
-#   - echo "after_failure!"
-
-#===============================================================================
-# Build Results
-# Build results are split into two categories: artifacts and targets
-# You may omit either key and stiff have a successfull build
-# They may be a string, list and contain any bash glob
-#===============================================================================
-
-## Build Artifacts: upload anything you want!
-## Your build artifacts will be put into the website
-## http://artifacts.build.binstar.info/USERNAME/PACKGE_NAME/BUILD_NO
-## You can store all logs or any derived data here
-## Remember, the site http://artifacts.build.binstar.info is NOT secure and does not
-## require a user to log in to view
-# build_artifacts:
-#   - *.log
-
-## Build Targets: Upload these files to your binstar package
-## build targets may be a list of files (globs allows) to upload
-## The special build targets 'conda' and 'pypi' may be used to
-## upload conda builds
-## e.g. conda is an alias for /opt/anaconda/conda-bld/<os-arch>/*.tar.bz2
+ - conda build . --python 2.7
 build_targets:
  files: conda
  channels: {}
-    """.format(package_name, upload_acct, channel_name)
+iotimeout: 600
+ """.format(package_name, upload_acct, channel_name)
     return binstar_yml_template
 
 
+def make_python_3_4_2_template(package_name, upload_acct, channel_name=None):
+    if channel_name is None:
+        channel_name = DEFAULT_CHANNEL
+    binstar_yml_template = """package: {}
+user: {}
+platform:
+ - linux-64
+engine:
+ - python=3.4
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build . --python 3.4
+build_targets:
+ files: conda
+ channels: {}
+iotimeout: 600
+ """.format(package_name, upload_acct, channel_name)
+    return binstar_yml_template
+
+
+def make_debian7_template(package_name, upload_acct, channel_name=None):
+    if channel_name is None:
+        channel_name = DEFAULT_CHANNEL
+    binstar_yml_template = """package: {0}
+user: {1}
+platform:
+ - linux-64
+engine:
+ - python=2.7
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build . --python 2.7
+build_targets:
+ files: conda
+ channels: {2}
+iotimeout: 600
+---
+user: {1}
+platform:
+ - linux-64
+engine:
+ - python=3.4
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build . --python 3.4
+build_targets:
+ files: conda
+ channels:
+   - {2}
+iotimeout: 600
+ """.format(package_name, upload_acct, channel_name)
+    return binstar_yml_template
+
+
+def make_debian7_python_independent_template(package_name, upload_acct, channel_name=None):
+    if channel_name is None:
+        channel_name = DEFAULT_CHANNEL
+    binstar_yml_template = """package: {0}
+user: {1}
+platform:
+ - linux-64
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build .
+build_targets:
+ files: conda
+ channels: {2}
+iotimeout: 600
+ """.format(package_name, upload_acct, channel_name)
+    return binstar_yml_template
+
+
+def make_default_template(package_name, upload_acct, channel_name=None):
+    if channel_name is None:
+        channel_name = DEFAULT_CHANNEL
+    binstar_yml_template = """package: {0}
+user: {1}
+platform:
+ - linux-64
+ - osx-64
+engine:
+ - python=2.7
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build . --python 2.7
+build_targets:
+ files: conda
+ channels: {2}
+iotimeout: 600
+---
+user: {1}
+platform:
+ - linux-64
+ - osx-64
+engine:
+ - python=3.4
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build . --python 3.4
+build_targets:
+ files: conda
+ channels:
+   - {2}
+iotimeout: 600
+ """.format(package_name, upload_acct, channel_name)
+    return binstar_yml_template
+
+
+def make_py2only_template(package_name, upload_acct, channel_name=None):
+    if channel_name is None:
+        channel_name = DEFAULT_CHANNEL
+    binstar_yml_template = """package: {0}
+user: {1}
+platform:
+ - linux-64
+ - osx-64
+engine:
+ - python=2.7
+before_script:
+ - conda install -c https://conda.binstar.org/binstar binstar --yes
+ - binstar config --set url https://conda.nsls2.bnl.gov/api
+ - conda config --add channels latest
+script:
+ - conda build . --python 2.7
+build_targets:
+ files: conda
+ channels: {2}
+iotimeout: 600
+ """.format(package_name, upload_acct, channel_name)
+    return binstar_yml_template
+
+
+TEMPLATE_DICT = {
+    'default': make_default_template,
+    'python': make_debian7_python_independent_template,
+    'readline': make_debian7_python_independent_template,
+    'ncurses': make_debian7_python_independent_template,
+    'vistrails': make_py2only_template,
+    'pyspec': make_py2only_template,
+    'carchivetools': make_py2only_template,
+    'channelarchiver': make_py2only_template,
+}
+
 def write_yml(build_folder, upload_acct, channel_name):
-    meta_yaml_file = safe_yaml_read(os.path.join(build_folder, 'meta.yaml'))
-    package_name = meta_yaml_file['package']['name']
+    package_name = get_package_name(os.path.join(build_folder, 'meta.yaml'))
     with open(os.path.join(build_folder, '.binstar.yml'), 'w') as f:
-        f.write(make_template(package_name, upload_acct, channel_name))
+        template = TEMPLATE_DICT.get(package_name.lower(), TEMPLATE_DICT['default'])
+        f.write(template(package_name, upload_acct, channel_name))
+    with open(os.path.join(build_folder, 'binstar-build-submit.sh'), 'w') as f:
+        cmd = "binstar-build submit"
+        cmd += " -p {}/{}".format(upload_acct, package_name)
+        cmd += " --channel {}".format(channel_name)
+        f.write(cmd)
 
 
 def make_ymls(root_folder, upload_acct, channel_name):
