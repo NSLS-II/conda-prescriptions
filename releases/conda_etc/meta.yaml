@@ -3,10 +3,10 @@ package:
   version: '1'
 
 build:
-  number: 5
+  number: 6
 
 requirements:
   run:
-    - conda-env >=2.4
+    - conda-env >=2.1.4
 about:
   summary: 'Make user the $PREFIX/etc path is available in CONDA_ETC_'
