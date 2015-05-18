@@ -14,10 +14,9 @@ mkdir -p $PREFIX/etc/conda/deactivate.d
 
 ACTIVATE=$PREFIX/etc/conda/activate.d/plugin_path.sh
 DEACTIVATE=$PREFIX/etc/conda/deactivate.d/plugin_path.sh
-PLUGIN_PATH=${PREFIX}/lib
 
 # set up
-echo "export HDF5_PLUGIN_PATH="$PLUGIN_PATH > $ACTIVATE
+echo "export HDF5_PLUGIN_PATH=$CONDA_ENV_PATH/lib"> $ACTIVATE
 
 # tear down
 echo "unset HDF5_PLUGIN_PATH" > $DEACTIVATE
@@ -25,5 +24,3 @@ echo "unset HDF5_PLUGIN_PATH" > $DEACTIVATE
 # clean up after self
 unset ACTIVATE
 unset DEACTIVATE
-unset PLUGIN_PATH
-
