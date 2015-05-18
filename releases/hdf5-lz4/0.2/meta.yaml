@@ -14,7 +14,7 @@ requirements:
         - hdf5
     run:
         - hdf5
-        - conda-env > 2.1.4  # when $CONDA_ENV_PATH was added
+        - conda-env >2.1.4  # when $CONDA_ENV_PATH was added
 
 about:
     home: https://github.com/dectris/HDF5Plugin
