@@ -25,7 +25,8 @@ requirements:
 test:
     imports:
         - pyOlog
-        - pyOlog.cli.ipy
+        # this has a user input on import (?!?) so don't test
+        #- pyOlog.cli.ipy
 
 about:
     home: http://olog.github.io/
