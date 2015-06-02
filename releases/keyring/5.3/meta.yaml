@@ -1,50 +1,61 @@
 package:
-  name: pcaspy
-  version: 0.5.1
+  name: keyring
+  version: "5.3"
 
 source:
-  fn: pcaspy-0.5.1.tar.gz
-  url: https://pypi.python.org/packages/source/p/pcaspy/pcaspy-0.5.1.tar.gz
-  md5: ba8c56ef136540cbaa463d35385b4c42
+  fn: keyring-5.3.zip
+  url: https://pypi.python.org/packages/source/k/keyring/keyring-5.3.zip
+  md5: fd50a2be4a44a78efb09a7c046b6410d
 #  patches:
    # List any patch files here
    # - fix.patch
 
 build:
   # preserve_egg_dir: True
-  # entry_points:
+  entry_points:
     # Put any entry points (scripts to be generated automatically) here. The
     # syntax is module:function.  For example
     #
-    # - pyasn1-modules = pyasn1-modules:main
+    # - keyring = keyring:main
     #
-    # Would create an entry point called pyasn1-modules that calls pyasn1-modules.main()
+    # Would create an entry point called keyring that calls keyring.main()
 
+    - keyring=keyring.cli:main
 
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
-  number: 2
+  # number: 1
 
 requirements:
   build:
     - python
     - setuptools
-    - epics-base
-    - swig
+    - hgtools
 
   run:
     - python
-    - epics-base
 
 test:
-  # Python imports
+#  requires:
+#    - pytest
+#    - gdata
+##    - python-keyczar
+#    - fs
+#    - mock
+#    - pycrypto
+## Python imports
   imports:
-    - pcaspy
+    - keyring
+    - keyring.backends
+    - keyring.tests
+    - keyring.tests.backends
+    - keyring.util
 
-  #commands:
+  commands:
     # You can put test commands to be run here.  Use this to test that the
     # entry points work.
-    # - reindent --help
+
+    - keyring --help
 
   # You can also put a file called run_test.py in the recipe that will be run
   # at test time.
@@ -54,8 +65,9 @@ test:
     # - nose
 
 about:
-  home: https://code.google.com/p/pcaspy/
-  license: BSD
+  home: http://bitbucket.org/kang/python-keyring-lib
+  license: Python Software Foundation License or MIT License
+  summary: 'Store and access your passwords safely.'
 
 # See
 # http://docs.continuum.io/conda/build.html for
