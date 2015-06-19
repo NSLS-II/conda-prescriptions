@@ -4,13 +4,13 @@ package:
 
 source:
   fn: mongoengine-0.8.7.tar.gz
-  url: https://pypi.python.org/packages/source/m/mongoengine/mongoengine-0.8.7.tar.gz
-  md5: 189d7c833519c3483cf69f59b6a51dc7
+  url: https://github.com/MongoEngine/mongoengine/archive/v0.8.7.tar.gz
+  md5: 96e78c892d3e30ed0c813e8fa5fe133e
 #  patches:
    # List any patch files here
    # - fix.patch
 
-# build:
+build:
   # preserve_egg_dir: True
   # entry_points:
     # Put any entry points (scripts to be generated automatically) here. The
@@ -23,7 +23,7 @@ source:
 
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
-  # number: 1
+  number: 1
 
 requirements:
   build:
