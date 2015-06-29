@@ -30,8 +30,8 @@ requirements:
     - bubblegum [py2k]
     - scikit-xray [py2k]
     - pims [py2k]
-    - metadatastore
-    - filestore
+    - metadatastore >=0.1.0
+    - filestore >=0.1.0
     - channelarchiver
     - six
 
