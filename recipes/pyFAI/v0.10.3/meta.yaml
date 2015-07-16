@@ -30,9 +30,17 @@ requirements:
   build:
     - python
     - setuptools
-
+    - numpy
+    - cython
   run:
     - python
+    - numpy
+    - fabio
+    - scipy
+    - h5py
+    - pillow
+    - lxml
+    - cython
 
 test:
   # Python imports
