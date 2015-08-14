@@ -3,11 +3,7 @@ package:
   version: '1'
 
 build:
-  number: 0
-
-requirements:
-  run:
-    - conda_etc
+  number: 1
 
 about:
   summary: 'HXN server configuration'
