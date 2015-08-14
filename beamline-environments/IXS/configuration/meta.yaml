@@ -3,11 +3,7 @@ package:
   version: '1'
 
 build:
-  number: 3
-
-requirements:
-  run:
-    - conda_etc
+  number: 4
 
 about:
   summary: 'IXS server configuration'
