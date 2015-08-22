@@ -1,11 +1,11 @@
 package:
   name: pyfai
-  version: "0.10.3"
+  version: {{ environ['GIT_DESCRIBE_TAG'] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
 
 source:
-  fn: pyFAI-0.10.3.tar.gz
-  url: https://pypi.python.org/packages/source/p/pyFAI/pyFAI-0.10.3.tar.gz
-  md5: b3d4b5e2afed39a67097b6381752a70a
+  git_url: https://github.com/kif/pyFAI.git
+  git_rev: master
+
 #  patches:
    # List any patch files here
    # - fix.patch
