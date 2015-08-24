@@ -150,4 +150,4 @@ if __name__ == "__main__":
         # use the default channel
         channel_name = None
     # make the yaml files
-    make_ymls(os.getcwd(), upload_acct, channel_name)
+    make_ymls(os.path.abspath('../'), upload_acct, channel_name)
