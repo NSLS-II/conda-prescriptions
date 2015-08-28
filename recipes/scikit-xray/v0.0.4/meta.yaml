@@ -1,15 +1,14 @@
 package:
   name: scikit-xray
-  version: {{ environ['GIT_DESCRIBE_TAG'] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
+  version: v0.0.4
 
 source:
-  git_url: https://github.com/scikit-xray/scikit-xray
-  git_rev: master
-
+  git_url: https://github.com/scikit-xray/scikit-xray.git
+  git_rev: 'v0.0.4'
 
 build:
   number: 0
-  string: {{ environ.get('GIT_BUILD_STR', '') }}_np{{ np }}py{{ py }}
+  # string: {{ environ.get('GIT_BUILD_STR', '') }}_np{{ np }}py{{ py }}
 
 requirements:
   build:
@@ -24,8 +23,8 @@ requirements:
     - six
     - xraylib
     - scikit-image
-    - lmfit
-    - netcdf4
+    - lmfit ==0.8.1
+    - netcdf4  # optional, required for skxray.io
 
 test:
   requires:
@@ -68,5 +67,5 @@ test:
     - skxray.io.gsas_file_reader
 
 about:
-  home: http://Nikea.github.io/scikit-xray/
+  home: http://scikit-xray.github.io/scikit-xray/
   license: 3-Clause BSD
