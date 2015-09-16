@@ -8,7 +8,7 @@ ETC=$PREFIX/etc
 echo "# metadatastore configuration
 # installed by chx_configuration
 # DO NOT EDIT
-host: xf11idb-ioc1
+host: xf11id-srv1
 database: datastore
 port: 27017
 timezone: US/Eastern
@@ -17,7 +17,7 @@ timezone: US/Eastern
 echo "# filestore configuration
 # installed by chx_configuration
 # DO NOT EDIT
-host: xf11idb-ioc1
+host: xf11id-srv1
 database: filestore
 port: 27017
 " > $ETC/filestore.yml
