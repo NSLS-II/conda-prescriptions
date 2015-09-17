@@ -6,8 +6,6 @@ source:
   git_url: https://github.com/NSLS-II/dataportal.git
   git_rev: v0.1.0
 
-  patches:
-    - setup_py.patch
 build:
   number: 0
 
@@ -29,6 +27,7 @@ requirements:
     - channelarchiver
     - six
     - humanize
+    - scikit-image
 
 test:
   requires:
