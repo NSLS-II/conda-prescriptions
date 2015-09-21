@@ -1,13 +1,13 @@
 package:
   name: scikit-xray
   version: v0.0.5
-source:
-  git_url: ../
 
+source:
+  git_url: https://github.com/scikit-xray/scikit-xray
+  git_rev: v0.0.5
 
 build:
   number: 0
-  string: v0.0.5
 
 requirements:
   build:
