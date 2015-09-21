@@ -18,7 +18,7 @@ requirements:
   run:
     - python
     - numpy
-    - scipy
+    - scipy ==0.15.1
     - six
     - xraylib
     - scikit-image
