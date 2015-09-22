@@ -13,6 +13,7 @@ requirements:
     # - ophyd >=0.1
     - pyolog ==v4.0.0.post5+g1a24409
     - openpyxl
-    - dataportal >=0.2.0
+    - dataportal >=0.2.2
     - bluesky >=0.2.0
+    - pyepics ==v3.2.4.post19+g763d30
     - channelarchiver ==v0.0.5.post6
