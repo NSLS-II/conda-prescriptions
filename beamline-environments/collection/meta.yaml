@@ -4,14 +4,15 @@ package:
 
 
 build:
-  number: 0
+  number: 1
 
 
 requirements:
   run:
     - python ==3.4
-    - ophyd >=0.1
+    # - ophyd >=0.1
     - pyolog
     - openpyxl
     - dataportal >=0.2.0
     - bluesky >=0.2.0
+    - channelarchiver ==v0.0.5.post6
