@@ -10,7 +10,7 @@ build:
 requirements:
   run:
     - python ==3.4
-    # - ophyd >=0.1
+    - ophyd >=0.1
     - pyolog ==v4.0.0.post5+g1a24409
     - openpyxl
     - dataportal >=0.2.2
