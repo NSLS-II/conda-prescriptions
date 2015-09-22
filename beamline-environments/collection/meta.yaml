@@ -17,3 +17,4 @@ requirements:
     - bluesky >=0.2.0
     - pyepics ==v3.2.4.post19+g763d30
     - channelarchiver ==v0.0.5.post6
+    - lmfit ==0.9.0rc1.post0
