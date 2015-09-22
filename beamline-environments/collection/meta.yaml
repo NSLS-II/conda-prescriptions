@@ -1,0 +1,17 @@
+package:
+  name: collection
+  version: '0.1'
+
+
+build:
+  number: 0
+
+
+requirements:
+  run:
+    - python ==3.4
+    - ophyd >=0.1
+    - pyolog
+    - openpyxl
+    - dataportal >=0.2.0
+    - bluesky >=0.2.0
