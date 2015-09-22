@@ -11,7 +11,7 @@ requirements:
   run:
     - python ==3.4
     # - ophyd >=0.1
-    - pyolog
+    - pyolog ==v4.0.0.post5+g1a24409
     - openpyxl
     - dataportal >=0.2.0
     - bluesky >=0.2.0
