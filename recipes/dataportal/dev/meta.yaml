@@ -5,19 +5,15 @@ package:
 source:
   git_url: https://github.com/NSLS-II/dataportal.git
   git_rev: master
-  patches:
-    - setup_py.patch
+
 build:
   string: {{ environ.get('GIT_BUILD_STR', '') }}_np{{ np }}py{{ py }}
   number: 0
 
-  entry_points:
-    - replay = dataportal.replay.replay:main
 
 requirements:
   build:
     - python
-    - enaml [py2k]
     - numpy
     - six
 
@@ -26,14 +22,11 @@ requirements:
     - pandas
     - matplotlib
     - pyyaml
-    - enaml [py2k]
-    - bubblegum [py2k]
-    - scikit-xray [py2k]
-    - pims [py2k]
     - metadatastore >=0.1.0
     - filestore >=0.1.0
     - channelarchiver
     - six
+    - scikit-image
 
 test:
   imports:
@@ -47,10 +40,6 @@ test:
     - dataportal.sources
     - dataportal.sources.dummy_sources
     - dataportal.utils
-    - dataportal.replay
-    - dataportal.replay.muxer  [py2k]
-    - dataportal.replay.scalar [py2k]
-    - dataportal.replay.search [py2k]
 
 about:
   home: https://github.com/NSLS-II/dataportal
