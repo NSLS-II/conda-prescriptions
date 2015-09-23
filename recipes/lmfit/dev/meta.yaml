@@ -21,6 +21,7 @@ requirements:
         - python
         - numpy
         - scipy
+        - ipywidgets
 
 test:
     imports:

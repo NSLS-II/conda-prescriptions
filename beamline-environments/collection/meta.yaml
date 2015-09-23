@@ -1,0 +1,31 @@
+package:
+  name: collection
+  version: '0.1'
+
+
+build:
+  number: 1
+
+
+requirements:
+  run:
+requirements:
+  run:
+    - python ==3.4
+    - openpyxl
+    - matplotlib >=1.5.0rc1
+    # sort of our deps
+    - pyolog >=v4.0.0.post5+g1a24409
+    - channelarchiver >=v0.0.5.post6
+    - pyepics >=v3.2.4.post19+g763d30
+    - lmfit >=0.9.0rc1.post0
+    # our data collection/retrieval deps
+    - bluesky >=0.2.0
+    - ophyd >=0.1
+    - dataportal >=0.2.2
+    - metadatastore >=0.2.0
+    - filestore >=0.2.0
+    # our data exploration/analysis/visualization deps
+    - album >=v0.0.1
+    - scikit-xray >=v0.0.5
+    - xray-vision >=v0.0.3
