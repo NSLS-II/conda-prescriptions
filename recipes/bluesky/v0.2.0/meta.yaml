@@ -9,7 +9,7 @@ source:
 build:
   # Note that this will override the default build string with the Python
   # and NumPy versions
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -28,7 +28,7 @@ requirements:
     - traitlets
     - history
     - lmfit
-
+    - xray-vision >=0.0.3
 test:
   requires:
     - nslsii_dev_configuration
