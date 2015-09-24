@@ -7,7 +7,7 @@ source:
   git_rev: v0.0.5
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -18,7 +18,7 @@ requirements:
   run:
     - python
     - numpy
-    - scipy ==0.15.1
+    - scipy
     - six
     - xraylib
     - scikit-image
