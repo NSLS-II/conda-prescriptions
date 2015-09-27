@@ -10,7 +10,7 @@ source:
   # git_rev: ?
 
 build:
-  string: {{ environ.get('GIT_BUILD_STR', '') }}_np{{ np }}py{{ py }}
+  string: {{ environ.get('GIT_BUILD_STR', '') }}_py{{ py }}
   number: 0
 
 requirements:
@@ -24,6 +24,11 @@ requirements:
     - six
     - pyyaml
     - pandas
+    - boltons
+    - prettytable
+    - humanize
+    - pytz
+    - jinja2
 
 test:
   requires:
@@ -36,7 +41,7 @@ test:
     - metadatastore.api
     - metadatastore.conf
     - metadatastore.odm_templates
-    - metadatastore.document
+    - metadatastore.doc
     - metadatastore.utils
 
 about:
