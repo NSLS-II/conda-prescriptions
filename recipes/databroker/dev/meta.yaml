@@ -7,8 +7,11 @@ source:
   git_rev: master
 
 build:
+  # Note that this will override the default build string with the Python
+  # and NumPy versions
+  string: {{ environ.get('GIT_BUILD_STR', '') }}_py{{ py }}
   number: 0
-
+  
 requirements:
   build:
     - python
