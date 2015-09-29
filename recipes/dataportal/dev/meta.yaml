@@ -3,33 +3,30 @@ package:
   version: {{ environ['GIT_DESCRIBE_TAG'] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
 
 source:
-  git_url: https://github.com/NSLS-II/dataportal.git
-  git_rev: master
+  git_url: ../
 
 build:
-  string: {{ environ.get('GIT_BUILD_STR', '') }}_py{{ py }}
   number: 0
 
-  entry_points:
-    - replay = dataportal.replay.replay:main
+  # Note that this will override the default build string with the Python
+  #   # and NumPy versions
+  string: {{ environ.get('GIT_BUILD_STR', '') }}_np{{ np }}py{{ py }}
 
 requirements:
   build:
     - python
-    - six
 
   run:
     - python
+    # still needed because StepScan
     - pandas
-    - matplotlib
-    - pyyaml
-    - pims
-    - metadatastore
-    - filestore
-    - channelarchiver
     - six
+    - databroker
+    - datamuxer
 
 test:
+  requires:
+    - nslsii_dev_configuration
   imports:
     - dataportal
     - dataportal.api
@@ -38,8 +35,6 @@ test:
     - dataportal.examples.sample_data
     - dataportal.broker
     - dataportal.muxer
-    - dataportal.sources
-    - dataportal.sources.dummy_sources
     - dataportal.utils
 
 about:
