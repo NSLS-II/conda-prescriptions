@@ -21,7 +21,7 @@ requirements:
     - lmfit >=0.9.0
     # our data collection/retrieval deps
     - bluesky >=0.2.0
-    - ophyd >=0.1
+    - ophyd >=0.1.2
     - dataportal >=0.2.2
     - metadatastore >=0.2.0
     - filestore >=0.2.0
