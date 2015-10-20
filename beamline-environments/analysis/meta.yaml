@@ -1,19 +1,21 @@
 package:
   name: analysis
-  version: '0.1'
+  version: '2015-3'
 
 build:
-  number: 5
+  number: 1
 
 requirements:
   run:
     - python ==3.4.3
-    - ipython-notebook
+    - jupyter
     - ipywidgets
-    - dataportal >=0.2.2
+    - pymongo <3.0
+    - dataportal >=v0.2.2
     - channelarchiver
-    - lmfit
-    - matplotlib
+    - lmfit >=0.9.0
+    - matplotlib >= 1.5.0rc1
     - album
-    - scikit-xray
-    - xray-vision
+    - scikit-xray >=v0.5.0
+    - xray-vision >=v0.3.0
+    - album >=v0.0.1
