@@ -19,4 +19,4 @@ requirements:
     - bluesky >=v0.3.0
     - ophyd >=v0.1.0
     # our data exploration/analysis/visualization deps
-    - analysis >=2015-3
+    - analysis >=2015-03
