@@ -1,0 +1,31 @@
+package:
+  name: collection-dev
+  version: '2015-3'
+# https://github.com/ericdill/conda-prescriptions/blob/add-dp-v0.2.2/beamline-environments/proposed-deployment-strategy.rst
+
+
+build:
+  number: 1
+
+requirements:
+  run:
+    - python ==3.4.3
+    - openpyxl
+    - matplotlib >=1.5.0rc1
+    - ipython
+    - jupyter
+    # sort of our deps
+    - pyolog >=v4.0.0.post5+g1a24409
+    - channelarchiver >=v0.0.5.post6
+    - pyepics >=v3.2.4.post19+g763d30
+    - lmfit >=0.9.0
+    # our data collection/retrieval deps
+    - bluesky >=v0.3.0
+    - ophyd >=v0.1.0
+    - dataportal >=v0.2.2
+    - metadatastore >=v0.2.0
+    - filestore >=v0.2.0
+    # our data exploration/analysis/visualization deps
+    - album >=v0.0.1
+    - scikit-xray >=v0.0.5
+    - xray-vision >=v0.0.3
