@@ -1,11 +1,11 @@
 package:
   name: ophyd
-  version: v0.1.0
+  version: v0.1.2
 
 
 source:
   git_url: https://github.com/NSLS-II/ophyd
-  git_rev: v0.1.0
+  git_rev: v0.1.2
 
 build:
   number: 1

@@ -9,14 +9,6 @@ build:
 
 requirements:
   run:
-    - openpyxl
-    # sort of our deps
-    - pyolog >=v4.0.0.post5+g1a24409
-    - channelarchiver >=v0.0.5.post6
-    - pyepics >=v3.2.4.post19+g763d30
-    - lmfit >=0.9.0
-    # our data collection/retrieval deps
+    - analysis >=2015-03
     - bluesky >=v0.3.0
     - ophyd >=v0.1.0
-    # our data exploration/analysis/visualization deps
-    - analysis >=2015-03
