@@ -1,6 +1,6 @@
 package:
   name: analysis
-  version: '2015-3'
+  version: '2015-03'
 
 build:
   number: 1
