@@ -10,5 +10,5 @@ build:
 requirements:
   run:
     - analysis >=2015-03
-    - bluesky >=v0.3.0
+    - bluesky >=v0.3
     - ophyd >=v0.1.0
