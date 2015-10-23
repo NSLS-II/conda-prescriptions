@@ -1,0 +1,33 @@
+package:
+    name: diffpy.srxplanar
+    version: {{ environ['GIT_DESCRIBE_TAG'] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
+
+source:
+    git_url: https://github.com/danielballan/diffpy.srxplanar
+    git_rev: c155049530f820f252751267d162e33362b9a09a
+
+build:
+    number: 0
+    string: {{ environ.get('GIT_BUILD_STR', '') }}_np{{ np }}py{{ py }}
+
+requirements:
+    build:
+        - python
+        - six
+        - setuptools
+
+    run:
+        - python
+        - six
+        - numpy
+        - scipy
+        - tifffile
+
+test:
+    imports:
+        - diffpy.srxplanar
+        - diffpy.srxplanar.srxplanar
+
+about:
+    home: http://www.diffpy.org/diffpy.srxplanar/
+    license: BSD
