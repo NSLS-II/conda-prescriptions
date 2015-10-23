@@ -1,7 +1,7 @@
 
 package:
     name: epics-base
-    version: "3.14.12"
+    version: "3.14.12.4"
 
 source:
     fn: baseR3.14.12.4.tar.gz
@@ -11,10 +11,11 @@ source:
         - config_common.diff
 
 build:
-  number: 12
+  number: 0
 
 requirements:
   build:
+#    - perl
     - readline
 
   run:
