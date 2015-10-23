@@ -26,7 +26,7 @@ requirements:
     - python
     - bokeh
     - flask
-    - dataportal >=0.2.0
+    - databroker >=v0.3.0
     - numpy
 
 test:
