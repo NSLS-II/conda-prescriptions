@@ -7,20 +7,24 @@ source:
     git_rev: next
     
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - python
     - gobject-introspection
+    - pygobject  # [py2k] # ?
+    - pygobject3  # [py3k]
     - gsl
     - libtool
     - automake
     - autoconf
     - pkg-config
+    - m4
   run:
     - python
-    - pygobject
+    - pygobject  # [py2k] # ?
+    - pygobject3  # [py3k]
     - numpy
 
 about:
