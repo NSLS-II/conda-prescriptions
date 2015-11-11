@@ -7,13 +7,13 @@ source:
     git_rev: next
     
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
     - python
     - gobject-introspection
-    - pygobject  # [py2k] # ?
+    - pygobject  # [py2k]
     - pygobject3  # [py3k]
     - gsl
     - libtool
@@ -23,7 +23,7 @@ requirements:
     - m4
   run:
     - python
-    - pygobject  # [py2k] # ?
+    - pygobject  # [py2k]
     - pygobject3  # [py3k]
     - numpy
 
