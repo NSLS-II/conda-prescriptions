@@ -9,7 +9,7 @@ source:
   md5: 83b89587607e3eb65c70d361f13bab43
 
 build:
-  number: 0
+  number: 8
 
 about:
   home: https://sourceware.org/libffi/

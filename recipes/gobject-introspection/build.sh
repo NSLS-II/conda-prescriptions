@@ -9,7 +9,7 @@ export PYTHON="$PREFIX/bin/python3.4"
 
 # conda libffi doesn't come with pkgconfig info:
 export FFI_CFLAGS="-I$PREFIX/include" FFI_LIBS="-L$PREFIX/lib"
-./configure --prefix=$PREFIX  # || { cat config.log ; exit 1 ; }
+./configure --prefix=$PREFIX --with-python=$PREFIX/bin/python3
 make -j$(nproc --ignore=4)
 make install
 
