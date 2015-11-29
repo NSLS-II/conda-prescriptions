@@ -1,0 +1,24 @@
+package:
+  name: tmux
+  version: 2.1
+
+build:
+  number: 0
+
+source:
+  fn: tmux-2.1.tar.gz
+  url: https://github.com/tmux/tmux/releases/download/2.1/tmux-2.1.tar.gz
+
+requirements:
+  build:
+    - libevent
+    - ncurses
+
+  run:
+    - libevent
+    - ncurses
+
+about:
+  license: BSD
+  home: https://tmux.github.io
+  summary: tmux is a terminal multiplexer
