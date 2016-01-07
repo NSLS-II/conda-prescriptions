@@ -11,6 +11,7 @@ requirements:
     - jupyter
     - ipywidgets
     - pymongo <3.0
+    - datamuxer
     - databroker >=v0.3.0
     - channelarchiver
     - lmfit >=0.9.0
