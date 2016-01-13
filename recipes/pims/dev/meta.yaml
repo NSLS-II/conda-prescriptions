@@ -1,6 +1,6 @@
 package:
     name: pims
-    version: {{ environ['GIT_DESCRIBE_TAG'] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
+    version: {{ environ.get('GIT_DESCRIBE_TAG', 'v0')[1:] }}.post{{ environ.get('GIT_DESCRIBE_NUMBER', 0) }}
 
 source:
     git_url: https://github.com/soft-matter/pims.git
@@ -15,7 +15,8 @@ requirements:
         - python
         - six
         - setuptools
-        - tifffile
+        - slicerator
+        - numpy
 
     run:
         - python
@@ -24,6 +25,7 @@ requirements:
         - scipy
         - pillow
         - tifffile
+        - slicerator
 
 test:
     imports:
