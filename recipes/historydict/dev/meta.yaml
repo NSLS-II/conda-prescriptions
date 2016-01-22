@@ -1,9 +1,9 @@
 package:
-  name: history
-  version: {{ environ['GIT_DESCRIBE_TAG'] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
+  name: historydict
+  version: {{ environ.get('GIT_DESCRIBE_TAG', 'v0')[1:] }}.post{{ environ.get('GIT_DESCRIBE_NUMBER', ) }}
 
 source:
-  git_url: https://github.com/Nikea/history.git
+  git_url: https://github.com/Nikea/historydict.git
   git_rev: master
 
 build:
@@ -23,4 +23,4 @@ requirements:
 
 test:
   imports:
-    - history
+    - historydict

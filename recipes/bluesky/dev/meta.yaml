@@ -1,6 +1,6 @@
 package:
   name: bluesky
-  version: {{ environ['GIT_DESCRIBE_TAG'] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
+  version: {{ environ['GIT_DESCRIBE_TAG'][1:] }}.post{{ environ['GIT_DESCRIBE_NUMBER'] }}
 
 source:
   git_url: https://github.com/NSLS-II/bluesky
@@ -13,24 +13,22 @@ build:
 
 requirements:
   build:
-    - python >=3.4.3
+    - python
 
   run:
-    - python >=3.4.3
+    - python
     - jsonschema
     - super_state_machine
     - numpy
     - metadatastore
-    - filestore
+    - databroker
     - matplotlib
     - prettytable
     - cycler
     - traitlets
     - history
     - lmfit
-    # this needs to be major version 3 because lmfit has a bug in it right now
-    # (right now == 2015-09-22)
-    - IPython ==3
+    - ipython
 
 
 test:

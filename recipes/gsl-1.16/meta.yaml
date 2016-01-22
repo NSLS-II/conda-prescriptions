@@ -9,9 +9,6 @@ source:
 build:
   number: 3
 
-requirements:
-  build:
-    - gcc
 
 about:
   home: http://www.gnu.org/software/gsl/

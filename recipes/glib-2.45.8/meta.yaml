@@ -19,9 +19,11 @@ requirements:
     - libffi
     - python
     - zlib
+    - gettext
   run:
     - libffi
     - zlib
+    - gettext
 
 about:
   home: http://www.gtk.org/

@@ -29,11 +29,11 @@ requirements:
   build:
     - python
     - setuptools
-    - pymongo >=2.5
+    - pymongo ==2.8
 
   run:
     - python
-    - pymongo >=2.5
+    - pymongo ==2.8
 
 test:
   # Python imports
