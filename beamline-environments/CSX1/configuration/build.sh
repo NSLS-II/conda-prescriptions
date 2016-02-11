@@ -1,26 +1,30 @@
-#!/bin/bash
 
 mkdir -p $PREFIX/etc
 ETC=$PREFIX/etc
 
-
-# set up
-echo "# metadatastore configuration
-# installed by csx_configuration
+echo "# archiver configuration
+# installed by csx1_configuration
 # DO NOT EDIT
-host: xf23id-broker
-database: datastore2
-port: 27017
-timezone: US/Eastern
-" > $ETC/metadatastore.yml
+db: "$ETC"/pv_mapping.sql
+url: https://xf23id-ca.cs.nsls2.local:8888/cgi-bin/ArchiveDataServer.cgi
+" >$ETC/archiver.yml
 
 echo "# filestore configuration
-# installed by csx_configuration
+# installed by csx1_configuration
 # DO NOT EDIT
-host: xf23id-broker
 database: filestore
+host: xf23id-broker
 port: 27017
-" > $ETC/filestore.yml
+" >$ETC/filestore.yml
+
+echo "# metadatastore configuration
+# installed by csx1_configuration
+# DO NOT EDIT
+database: datastore2
+host: xf23id-broker
+port: 27017
+timezone: US/Eastern
+" >$ETC/metadatastore.yml
 
 
 
