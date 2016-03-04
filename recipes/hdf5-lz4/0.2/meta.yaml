@@ -12,9 +12,9 @@ build:
 requirements:
     build:
         - hdf5
+        - libza
     run:
         - hdf5
-        - conda-env >2.1.4  # when $CONDA_ENV_PATH was added
 
 about:
     home: https://github.com/dectris/HDF5Plugin
