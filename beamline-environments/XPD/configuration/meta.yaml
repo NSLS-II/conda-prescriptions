@@ -1,9 +1,0 @@
-package:
-  name: xpd_configuration
-  version: '1'
-
-build:
-  number: 4
-
-about:
-  summary: 'XPD server configuration'

@@ -1,9 +1,0 @@
-package:
-  name: srx_configuration
-  version: '1'
-
-build:
-  number: 1
-
-about:
-  summary: 'SRX server configuration'
