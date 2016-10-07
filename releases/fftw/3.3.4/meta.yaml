@@ -1,0 +1,13 @@
+package:
+  name: fftw
+  version: !!str 3.3.4
+
+source:
+    fn: fttw-3.3.4.tar.gz
+    url: http://www.fftw.org/fftw-3.3.4.tar.gz
+
+build:
+  number: 0
+
+#requirements:
+#  build:
